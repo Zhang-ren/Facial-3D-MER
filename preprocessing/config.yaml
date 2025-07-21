@@ -1,13 +1,13 @@
 # 数据路径配置
 paths:
   # 原始数据路径
-  origin_data: ''
+  origin_data: '/path/to/your/original/data'
   
   # 处理后的数据路径
-  processed_data: ''
+  processed_data: '/path/to/your/processed/data'
   
   # 输出结果路径
-  output_base: ''
+  output_base: '/path/to/your/output/directory'
   
   # 错误日志路径
   error_log: 'error.txt'
@@ -95,4 +95,21 @@ formats:
   flow_image: '.jpg'
   flow_data: '.mat'
   flow_npy: '.npy'
-  point_cloud: '.txt' 
+  point_cloud: '.txt'
+
+# 模型训练参数
+training:
+  # 学习率
+  learning_rate: 0.001
+  
+  # 训练轮数
+  epochs: 100
+  
+  # 权重衰减
+  weight_decay: 1e-4
+  
+  # 学习率衰减步长
+  lr_decay_steps: 20
+  
+  # 学习率衰减率
+  lr_decay_rate: 0.7 

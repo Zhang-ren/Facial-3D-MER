@@ -1,4 +1,4 @@
-# 3D Facial Micro-Expression Recognition System
+# Facial 3D Regional Structural Motion Representation Using Lightweight Point Cloud Networks for Micro-Expression Recognition
 
 **Official implementation** of the paper: [Facial 3D Regional Structural Motion Representation Using Lightweight Point Cloud Networks for Micro-Expression Recognition](Facial_3D_Regional_Structural_Motion_Representation_Using_Lightweight_Point_Cloud_Networks_for_Micro-Expression_Recognition.pdf)
 
@@ -112,11 +112,11 @@ python test_classification.py --exp_name [experiment_name] --model_path [model_p
 
 ```
 .
-├── config.yaml              # Configuration file
 ├── preprocessing/           # Data preprocessing scripts
 │   ├── step1_crop_face.py   # Face detection and cropping
 │   ├── step2_opticalflow.py # Optical flow computation
-│   └── step3_pointcloud.py  # Point cloud processing
+│   ├── step3_pointcloud.py  # Point cloud processing
+│   └── config.yaml              # Configuration file
 ├── models/                  # Model definitions
 ├── utils/                   # Utility functions
 ├── data_utils/              # Data loading and processing
