@@ -116,7 +116,7 @@ python test_classification.py --exp_name [experiment_name] --model_path [model_p
 │   ├── step1_crop_face.py   # Face detection and cropping
 │   ├── step2_opticalflow.py # Optical flow computation
 │   ├── step3_pointcloud.py  # Point cloud processing
-│   └── config.yaml              # Configuration file
+│   └── config.yaml          # Configuration file
 ├── models/                  # Model definitions
 ├── utils/                   # Utility functions
 ├── data_utils/              # Data loading and processing
