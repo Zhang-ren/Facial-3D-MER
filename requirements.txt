@@ -1,0 +1,16 @@
+numpy>=1.18.5
+scipy>=1.5.0
+matplotlib>=3.3.0
+opencv-python>=4.2.0.34
+pandas>=1.0.5
+PyYAML>=5.3.1
+torch>=1.6.0
+torchvision>=0.7.0
+open3d>=0.10.0
+scikit-learn>=0.23.1
+tqdm>=4.47.0
+transplant>=0.8.9
+dlib>=19.21.0
+tensorboardX>=2.1
+h5py>=2.10.0
+plyfile>=0.7.2 
