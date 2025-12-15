@@ -174,8 +174,36 @@ class get_loss(nn.Module):
         total_loss = F.nll_loss(pred, target)
 
         return total_loss
+
+def _count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
+
+def profile_pointnet2():
+    model = get_model(num_class=7, normal_channel=True)
+    total_params = _count_parameters(model)
+    print(f"Total parameters: {total_params/1e6:.4f} M ({total_params})")
+
+    try:
+        from thop import profile
+    except ImportError:
+        print("thop is not installed; install it to compute FLOPs (e.g. `pip install thop`).")
+        return
+
+    if not torch.cuda.is_available():
+        print("CUDA is required for a forward pass in this model; skipping FLOPs computation.")
+        return
+
+    model = model.cuda().eval()
+    dummy_input = torch.randn(1, 6, 8192).cuda()
+    with torch.no_grad():
+        flops, params = profile(model, inputs=(dummy_input,), verbose=False)
+    print(f"FLOPs: {flops/1e9:.4f} GFLOPs ({flops})")
+    print(f"Parameters (profile): {params/1e6:.4f} M ({params})")
+
 if __name__ == '__main__':
     input1 = torch.rand(32, 8, 1024)
     model = GraphConvolution(1024,1024, node_n=8)
     output = model(input1)
     print(output.shape)
+    print("Profiling PointNet++ classifier FLOPs and parameter count...")
+    profile_pointnet2()
