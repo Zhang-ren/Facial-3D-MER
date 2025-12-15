@@ -178,8 +178,8 @@ class get_loss(nn.Module):
 def _count_parameters(model):
     return sum(p.numel() for p in model.parameters())
 
-def profile_pointnet2():
-    model = get_model(num_class=7, normal_channel=True)
+def profile_pointnet2(num_class=7, normal_channel=True, batch_size=1, num_points=8192):
+    model = get_model(num_class=num_class, normal_channel=normal_channel)
     total_params = _count_parameters(model)
     print(f"Total parameters: {total_params/1e6:.4f} M ({total_params})")
 
@@ -190,14 +190,18 @@ def profile_pointnet2():
         return
 
     if not torch.cuda.is_available():
-        print("CUDA is required for a forward pass in this model; skipping FLOPs computation.")
+        # Trans2feat currently moves tensors to CUDA internally, so profiling the full forward pass requires CUDA.
+        print("CUDA is unavailable; skipping FLOPs profiling because the current forward path moves tensors to CUDA.")
         return
 
     model = model.cuda().eval()
-    dummy_input = torch.randn(1, 6, 8192).cuda()
+    input_channels = 6 if normal_channel else 3
+    # Dummy input layout: (batch_size, channels, num_points) for the SSG classifier.
+    dummy_input = torch.randn(batch_size, input_channels, num_points).cuda()
     with torch.no_grad():
         flops, params = profile(model, inputs=(dummy_input,), verbose=False)
     print(f"FLOPs: {flops/1e9:.4f} GFLOPs ({flops})")
+    # thop also reports parameter counts; both are shown for convenience.
     print(f"Parameters (profile): {params/1e6:.4f} M ({params})")
 
 if __name__ == '__main__':
