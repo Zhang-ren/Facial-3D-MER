@@ -4,7 +4,8 @@ function [afflow] = test(x,y,onset_save_path,apex_save_path,flow_save_path,afflo
 % x = cell2mat(x);
 % y = cell2mat(y);
 
-addpath('mex');
+this_dir = fileparts(mfilename('fullpath'));
+addpath(fullfile(this_dir, 'mex'));
 
 % path_xy = char(path_xy);
 img1 = char(onset_save_path);

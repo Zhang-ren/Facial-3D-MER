@@ -4,12 +4,13 @@ function [maxrad] = maxflow(onset_save_path,apex_save_path,ox,oy,mode)
 % x = double(x);
 % y = double(y);
 
-addpath('mex');
+this_dir = fileparts(mfilename('fullpath'));
+addpath(fullfile(this_dir, 'mex'));
 
 img1 = char(onset_save_path);
 img2 = char(apex_save_path);
-im1 = double(img1)/255.;
-im2 = double(img2)/255.;
+im1 = im2double(imread(img1));
+im2 = im2double(imread(img2));
 alpha = 0.012;
 ratio = 0.75;
 minWidth = 20;
