@@ -13,4 +13,5 @@ transplant>=0.8.9
 dlib>=19.21.0
 tensorboardX>=2.1
 h5py>=2.10.0
-plyfile>=0.7.2 
+plyfile>=0.7.2
+thop>=0.1.1
